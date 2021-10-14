@@ -37,3 +37,4 @@ target_link_libraries(sbr LINK_PRIVATE "${GL}")
 
 #copy engine shaders
 file(COPY vendor/TGJGE/shaders DESTINATION .)
+file(COPY assets DESTINATION .)
