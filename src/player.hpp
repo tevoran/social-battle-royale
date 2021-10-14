@@ -3,6 +3,9 @@
 
 #include <TGJGE.h>
 
+#define PLAYER_SCREEN_POS_X 0.45
+#define PLAYER_SCREEN_POS_Y 0.45
+
 namespace sbr
 {
 	//player
@@ -12,11 +15,13 @@ namespace sbr
 		TG_object *object;
 		TG_texture *tex;
 		bool animated=false;
-	public:
-		float x=0.45;
 		float dx=0;
-		float y=0.45;
 		float dy=0;
+
+	public:
+		float x=PLAYER_SCREEN_POS_X;
+		float y=PLAYER_SCREEN_POS_Y;
+		
 		void update();
 		void render();
 		player();

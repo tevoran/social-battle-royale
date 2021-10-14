@@ -2,7 +2,7 @@
 
 sbr::player::player()
 {
-	object=TG_new_object(TILE_X, TILE_Y, x, y, 3);
+	object=TG_new_object(TILE_X, TILE_Y, PLAYER_SCREEN_POS_X, PLAYER_SCREEN_POS_Y, 3);
 	tex=TG_new_texture("assets/player.png", false);
 	TG_use_texture_object(object, tex);
 }
@@ -47,7 +47,7 @@ void sbr::player::update()
 		TG_stop_animation_object(object);
 		animated=false;
 	}
-	
+
 	//normalize the speed
 	float dxdy = sqrt(dx*dx+dy*dy);
 	if(dxdy>0)
@@ -60,9 +60,8 @@ void sbr::player::update()
 		if(!animated)
 		{
 			animated=true;
-			TG_start_animation_object(object, 1, 3, 200, 1);
+			TG_start_animation_object(object, 1, 3, 175, 1);
 		}
-		TG_set_position_object(object, x, y);
 	}
 }
 
