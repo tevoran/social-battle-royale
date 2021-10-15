@@ -16,15 +16,15 @@ sbr::npc::npc(sbr::world& world)
 		tile_x=rand()%WORLD_SIZE_X;
 		tile_y=rand()%WORLD_SIZE_Y;
 	}while(!world.is_free(tile_x, tile_y));
-	
+	world.set_block(tile_x, tile_y);
 	pos_x=TILE_X*tile_x;
 	pos_y=TILE_Y*tile_y;
 }
 
 sbr::npc::~npc()
 {
-	TG_destroy_object(object);
-	TG_destroy_texture(tex);
+	//TG_destroy_object(object);
+	//TG_destroy_texture(tex);
 }
 
 void sbr::npc::render(sbr::player& player)

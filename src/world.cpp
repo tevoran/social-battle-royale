@@ -173,12 +173,54 @@ bool sbr::world::is_free(int x, int y)
 	}
 	if(tile_block[x][y]==NON_BLOCKED)
 	{
-		out=true;
-		return out;
+		return true;
 	}
 	return false;
 }
 
+void sbr::world::set_block(int x, int y)
+{
+	if(x<0)
+	{
+		return;
+	}
+	if(x>=WORLD_SIZE_X)
+	{
+		return;
+	}
+	if(y<0)
+	{
+		return;
+	}
+	if(y>=WORLD_SIZE_X)
+	{
+		return;
+	}
+	tile_block[x][y]=BLOCKED;
+	return;
+}
+
+void sbr::world::set_free(int x, int y)
+{
+	if(x<0)
+	{
+		return;
+	}
+	if(x>=WORLD_SIZE_X)
+	{
+		return;
+	}
+	if(y<0)
+	{
+		return;
+	}
+	if(y>=WORLD_SIZE_X)
+	{
+		return;
+	}
+	tile_block[x][y]=NON_BLOCKED;
+	return;
+}
 
 sbr::world::~world()
 {

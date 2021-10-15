@@ -15,7 +15,11 @@ namespace sbr
 	public:
 		void update(sbr::player& player);
 		void render(sbr::player& player);
+
+		//tile blocking mechanism
 		bool is_free(int x, int y);
+		void set_block(int x, int y);
+		void set_free(int x, int y);
 		world();
 		~world();
 	};

@@ -14,10 +14,12 @@ int main()
 	//stuff
 	sbr::player player; 
 	sbr::world world;
-	sbr::npc npc(world);
-	sbr::npc npc2(world);
-	sbr::npc npc3(world);
-	sbr::npc npc4(world);
+	std::vector<sbr::npc> npc;
+	for(int i=0; i<NUM_NPCS; i++)
+	{
+		sbr::npc tmp_npc(world);
+		npc.push_back(tmp_npc);
+	}
 
 
 	while(!TG_is_key_pressed(SDL_SCANCODE_ESCAPE))
@@ -29,10 +31,10 @@ int main()
 
 		//render
 		world.render(player);
-		npc.render(player);
-		npc2.render(player);
-		npc3.render(player);
-		npc4.render(player);
+		for(int i=0; i<NUM_NPCS; i++)
+		{
+			npc[i].render(player);
+		}
 		player.render();
 		TG_flip(SEA_COLOR);
 	}
