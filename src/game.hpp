@@ -17,5 +17,6 @@
 
 #include "player.hpp"
 #include "world.hpp"
+#include "npc.hpp"
 
 #endif

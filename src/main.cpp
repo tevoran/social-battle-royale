@@ -9,6 +9,7 @@ int main()
 	//stuff
 	sbr::player player; 
 	sbr::world world;
+	sbr::npc npc;
 
 	while(!TG_is_key_pressed(SDL_SCANCODE_ESCAPE))
 	{
@@ -16,6 +17,7 @@ int main()
 		world.update(player);
 
 		world.render(player);
+		npc.render(player);
 		player.render();
 		TG_flip(SEA_COLOR);
 	}
