@@ -2,9 +2,8 @@
 #define PLAYER_HPP
 
 #include <TGJGE.h>
+#include "game.hpp"
 
-#define PLAYER_SCREEN_POS_X 0.45
-#define PLAYER_SCREEN_POS_Y 0.45
 
 namespace sbr
 {

@@ -4,7 +4,7 @@
 
 int main()
 {
-	TG_init("Social Battle Royale", 1920, 1080, true, 60);
+	TG_init("Social Battle Royale", 1366, 768, false, 60);
 
 	//stuff
 	sbr::player player; 
@@ -13,6 +13,7 @@ int main()
 	while(!TG_is_key_pressed(SDL_SCANCODE_ESCAPE))
 	{
 		player.update();
+		world.update(player);
 
 		world.render(player);
 		player.render();

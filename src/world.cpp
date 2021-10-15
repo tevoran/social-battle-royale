@@ -128,6 +128,27 @@ void sbr::world::render(sbr::player& player)
 	}
 }
 
+void sbr::world::update(sbr::player& player)
+{
+	//don't let player move outside the world
+	if(player.x<(-PLAYER_SCREEN_POS_X))
+	{
+		player.x=-PLAYER_SCREEN_POS_X;
+	}
+	if(player.x>((WORLD_SIZE_X-1)*TILE_X-PLAYER_SCREEN_POS_X))
+	{
+		player.x=(WORLD_SIZE_X-1)*TILE_X-PLAYER_SCREEN_POS_X;
+	}
+	if(player.y<(-PLAYER_SCREEN_POS_Y))
+	{
+		player.y=-PLAYER_SCREEN_POS_Y;
+	}
+	if(player.y>((WORLD_SIZE_Y-1)*TILE_Y-PLAYER_SCREEN_POS_Y))
+	{
+		player.y=(WORLD_SIZE_Y-1)*TILE_Y-PLAYER_SCREEN_POS_Y;
+	}
+}
+
 sbr::world::~world()
 {
 	TG_destroy_texture(world_tex);

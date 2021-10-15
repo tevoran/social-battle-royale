@@ -11,6 +11,8 @@
 #define WORLD_SIZE_Y 25
 
 #define SEA_COLOR 0.179, 0.498, 0.543
+#define PLAYER_SCREEN_POS_X 0.45
+#define PLAYER_SCREEN_POS_Y 0.45
 #define PLAYER_SPEED 0.2
 
 #include "player.hpp"
