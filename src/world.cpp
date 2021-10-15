@@ -24,7 +24,7 @@ sbr::world::world()
 				tile[iy][ix],
 				9, 
 				9, 
-				INT_MAX,
+				0,
 				false);
 
 			//left bottom tile
@@ -34,7 +34,7 @@ sbr::world::world()
 					tile[iy][ix],
 					8, 
 					8, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//left tile
@@ -44,7 +44,7 @@ sbr::world::world()
 					tile[iy][ix],
 					1, 
 					1, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//left top tile
@@ -54,7 +54,7 @@ sbr::world::world()
 					tile[iy][ix],
 					2, 
 					2, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//top tile
@@ -64,7 +64,7 @@ sbr::world::world()
 					tile[iy][ix],
 					3, 
 					3, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//right top tile
@@ -74,7 +74,7 @@ sbr::world::world()
 					tile[iy][ix],
 					4, 
 					4, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//right tile
@@ -84,7 +84,7 @@ sbr::world::world()
 					tile[iy][ix],
 					5, 
 					5, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//right bottom tile
@@ -94,7 +94,7 @@ sbr::world::world()
 					tile[iy][ix],
 					6, 
 					6, 
-					INT_MAX,
+					0,
 					false);
 			}
 			//bottom tile
@@ -104,7 +104,7 @@ sbr::world::world()
 					tile[iy][ix],
 					7, 
 					7, 
-					INT_MAX,
+					0,
 					false);
 			}
 		}
