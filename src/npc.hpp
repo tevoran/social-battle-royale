@@ -10,8 +10,10 @@ namespace sbr
 	private:
 		TG_object *object;
 		TG_texture *tex;
+		float pos_x;
+		float pos_y;
 	public:
-		npc();
+		npc(sbr::world& world);
 		~npc();
 		void render(sbr::player& player);
 	};

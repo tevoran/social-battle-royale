@@ -11,6 +11,7 @@ sbr::world::world()
 	{
 		for(int iy=0; iy<WORLD_SIZE_Y; iy++)
 		{
+			tile_block[iy][ix]=NON_BLOCKED;
 			tile[iy][ix]=TG_new_object(
 				TILE_X,
 				TILE_Y,
@@ -148,6 +149,36 @@ void sbr::world::update(sbr::player& player)
 		player.y=(WORLD_SIZE_Y-1)*TILE_Y-PLAYER_SCREEN_POS_Y;
 	}
 }
+
+//true if free
+//false if blocked
+bool sbr::world::is_free(int x, int y)
+{
+	bool out=false;
+	if(x<0)
+	{
+		return out;
+	}
+	if(x>=WORLD_SIZE_X)
+	{
+		return out;
+	}
+	if(y<0)
+	{
+		return out;
+	}
+	if(y>=WORLD_SIZE_X)
+	{
+		return out;
+	}
+	if(tile_block[x][y]==NON_BLOCKED)
+	{
+		out=true;
+		return out;
+	}
+	return false;
+}
+
 
 sbr::world::~world()
 {
