@@ -7,6 +7,7 @@
 #include <ctime>
 #include <vector>
 #include <iostream>
+#include <string>
 
 //world
 #define TILE_X 0.05625
@@ -25,8 +26,13 @@
 
 //npcs
 #define NUM_NPCS 9
+#define CONVO_SIZE_X 1.0
+#define CONVO_SIZE_Y 0.25
+
+
 #include "player.hpp"
 #include "world.hpp"
+#include "conversation.hpp"
 #include "npc.hpp"
 
 #endif

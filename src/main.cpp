@@ -6,7 +6,7 @@
 
 int main()
 {
-	TG_init("Social Battle Royale", WIN, 60);
+	TG_init("Social Battle Royale", FULL, 60);
 
 	//init stuff
 	srand(time(NULL));
@@ -20,6 +20,7 @@ int main()
 		sbr::npc tmp_npc(world);
 		npc.push_back(tmp_npc);
 	}
+	sbr::conversation convo;
 
 
 	while(!TG_is_key_pressed(SDL_SCANCODE_ESCAPE))
@@ -29,16 +30,17 @@ int main()
 		world.update(player);
 		for(int i=0; i<NUM_NPCS; i++)
 		{
-			npc[i].update(player);
+			npc[i].update(player, convo);
 		}
 
 		//render
 		world.render(player);
+		player.render();
 		for(int i=0; i<NUM_NPCS; i++)
 		{
 			npc[i].render(player);
 		}
-		player.render();
+		convo.render();
 		TG_flip(SEA_COLOR);
 	}
 	TG_quit();

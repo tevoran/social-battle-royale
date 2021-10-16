@@ -1,9 +1,35 @@
 #include "game.hpp"
 #include "npc.hpp"
 
+#define NUM_NAMES 20
+
+std::string npc_names[]=
+{
+	"Elias",
+	"Abraham",
+	"Alberta",
+	"Hanna",
+	"Nick",
+	"Laura",
+	"Lara",
+	"John",
+	"Anna",
+	"Oliver",
+	"Luna",
+	"Owen",
+	"Amelia",
+	"Felix",
+	"Olivia",
+	"Ophelia",
+	"Isaac",
+	"Sophia",
+	"Athena",
+	"Arthur",
+};
 
 sbr::npc::npc(sbr::world& world)
 {
+	//npc sprite
 	object=TG_new_object(TILE_X, TILE_Y, 0.0, 0.0, 1);
 	tex=TG_new_texture("assets/npc.png", false);
 	TG_use_texture_object(object, tex);
@@ -17,9 +43,12 @@ sbr::npc::npc(sbr::world& world)
 		tile_y=rand()%WORLD_SIZE_Y;
 	}while(!world.is_free(tile_x, tile_y));
 	world.set_block(tile_x, tile_y);
-	std::cout << tile_x << "x" << tile_y << std::endl;
 	pos_x=TILE_X*tile_x;
 	pos_y=TILE_Y*tile_y;
+
+	int random_name=rand()%NUM_NAMES;
+	name=npc_names[random_name];
+	std::cout << "NPC's name is " << name << std::endl;
 }
 
 sbr::npc::~npc()
@@ -35,8 +64,9 @@ void sbr::npc::render(sbr::player& player)
 	TG_render_object(object);
 }
 
-void sbr::npc::update(sbr::player& player)
+void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 {
+	//collision starts a conversation
 	//don't let player move into the npc
 	float tmp_player_x=player.x;
 	float tmp_player_y=player.y;
@@ -49,7 +79,12 @@ void sbr::npc::update(sbr::player& player)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
+		current_conversation=true;
+		convo.make_active();
 	}
 	TG_set_position_object(object, pos_x, pos_y);
+
+	//ending a conversation
+
 
 }
