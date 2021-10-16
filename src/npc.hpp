@@ -16,6 +16,7 @@ namespace sbr
 		npc(sbr::world& world);
 		~npc();
 		void render(sbr::player& player);
+		void update(sbr::player& player);
 	};
 }
 

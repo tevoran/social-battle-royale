@@ -11,16 +11,16 @@ namespace sbr
 	class player
 	{
 	private:
-		TG_object *object;
 		TG_texture *tex;
 		bool animated=false;
+	public:
+		TG_object *object;
+		
+		float x=PLAYER_SCREEN_POS_X;
+		float y=PLAYER_SCREEN_POS_Y;
 		float dx=0;
 		float dy=0;
 
-	public:
-		float x=PLAYER_SCREEN_POS_X;
-		float y=PLAYER_SCREEN_POS_Y;
-		
 		void update();
 		void render();
 		player();

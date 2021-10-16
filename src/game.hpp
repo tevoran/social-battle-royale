@@ -24,7 +24,7 @@
 #define PLAYER_SPEED 0.2
 
 //npcs
-#define NUM_NPCS 6
+#define NUM_NPCS 9
 #include "player.hpp"
 #include "world.hpp"
 #include "npc.hpp"

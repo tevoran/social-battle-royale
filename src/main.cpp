@@ -6,7 +6,7 @@
 
 int main()
 {
-	TG_init("Social Battle Royale", FULL, 60);
+	TG_init("Social Battle Royale", WIN, 60);
 
 	//init stuff
 	srand(time(NULL));
@@ -27,7 +27,10 @@ int main()
 		//updates
 		player.update();
 		world.update(player);
-
+		for(int i=0; i<NUM_NPCS; i++)
+		{
+			npc[i].update(player);
+		}
 
 		//render
 		world.render(player);
