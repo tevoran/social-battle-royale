@@ -1,6 +1,7 @@
-//conversational behaviour of ELIAS
+#include <npc.hpp>
+#include <game.hpp>
 
-if(!strcmp(name.c_str(), "Elias"))
+void sbr::npc::elias(sbr::conversation& convo)
 {
-		//std::cout << "ALOHA\n";
+	std::cout << "ELIAS\n";
 }

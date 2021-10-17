@@ -8,11 +8,7 @@ std::string npc_names[]=
 	"Elias",
 	"Abraham",
 	"Alberta",
-<<<<<<< HEAD
-	"Johannes",
-=======
 	"Alexa",
->>>>>>> 060af6019bc48a3d7db8b4180b0f8181cf784b6a
 	"Nick",
 	"Laura",
 	"Lara",
@@ -124,6 +120,9 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	//the actual conversation code
 	if(current_conversation)
 	{
-		#include "npcs/elias.cpp"
+		if(!strcmp(name.c_str(), "Elias"))
+		{
+			elias(convo);
+		}
 	}
 }

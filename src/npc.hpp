@@ -28,6 +28,9 @@ namespace sbr
 		~npc();
 		void render(sbr::player& player);
 		void update(sbr::player& player, sbr::conversation& convo);
+
+		//npc convo implementations
+		void elias(sbr::conversation& convo);
 	};
 }
 
