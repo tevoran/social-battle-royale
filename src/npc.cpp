@@ -81,6 +81,13 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 		player.y-=player.dy;
 		current_conversation=true;
 		convo.active(current_conversation);
+
+		//greeting
+		std::string greeting("Hello, I am ");
+		std::string complete=greeting+name;
+
+		std::cout << complete << std::endl;
+		convo.add_line(complete);
 	}
 	TG_set_position_object(object, pos_x, pos_y);
 
@@ -94,5 +101,9 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 		convo.active(current_conversation);
 	}
 
+	//the actual conversation code
+	if(current_conversation)
+	{
 
+	}
 }

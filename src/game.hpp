@@ -30,7 +30,11 @@
 //conversations
 #define CONVO_SIZE_X 1.0
 #define CONVO_SIZE_Y 0.25
-#define CONVO_END_RADIUS 0.2
+#define CONVO_END_RADIUS 0.15
+#define CONVO_TEXT_SIZE_Y 0.05
+#define CONVO_LETTER_SIZE 0.01
+#define TEXT_COLOR 0.404, 0.17, 0.081
+
 
 #include "player.hpp"
 #include "world.hpp"
