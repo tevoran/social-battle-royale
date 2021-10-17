@@ -5,6 +5,7 @@
 #include <climits>
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -12,8 +13,8 @@
 //world
 #define TILE_X 0.05625
 #define TILE_Y 0.1
-#define WORLD_SIZE_X 25
-#define WORLD_SIZE_Y 25
+#define WORLD_SIZE_X 15
+#define WORLD_SIZE_Y 15
 #define SEA_COLOR 0.179, 0.498, 0.543
 
 #define NON_BLOCKED 0
@@ -26,6 +27,8 @@
 
 //npcs
 #define NUM_NPCS 9
+#define NPC_MALE 0
+#define NPC_FEMALE 1
 
 //conversations
 #define CONVO_SIZE_X 1.0

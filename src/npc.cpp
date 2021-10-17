@@ -46,9 +46,23 @@ sbr::npc::npc(sbr::world& world)
 	pos_x=TILE_X*tile_x;
 	pos_y=TILE_Y*tile_y;
 
+	//determining traits
 	int random_name=rand()%NUM_NAMES;
 	name=npc_names[random_name];
 	std::cout << "NPC's name is " << name << std::endl;
+
+	//determining sex
+	//if name ends with 'a' then the NPC is female
+	if(name_c_str[name.length()-1]=='a')
+	{
+		sex=NPC_FEMALE;
+		std::cout << "female\n";
+	}
+	else
+	{
+		sex=NPC_MALE;
+		std::cout << "male\n";
+	}
 }
 
 sbr::npc::~npc()
@@ -80,6 +94,7 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 		player.x-=player.dx;
 		player.y-=player.dy;
 
+		//start a conversation
 		if(current_conversation==false)
 		{
 			//greeting
@@ -105,6 +120,6 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	//the actual conversation code
 	if(current_conversation)
 	{
-
+		#include "npcs/elias.cpp"
 	}
 }

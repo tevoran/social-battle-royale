@@ -42,6 +42,13 @@ void sbr::conversation::add_line(std::string string)
 	active_texts.emplace_back(text_tmp);
 }
 
+void sbr::conversation::clear()
+{
+	for(int i=0; i<active_texts.size(); i++)
+	{
+		TG_render_text(active_texts[i]);
+	}
+}
 
 void sbr::conversation::render()
 {

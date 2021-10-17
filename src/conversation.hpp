@@ -19,6 +19,7 @@ namespace sbr
 		~conversation();
 		void active(bool is_active);
 		void add_line(std::string string);
+		void clear();
 		void render();
 	};
 }
