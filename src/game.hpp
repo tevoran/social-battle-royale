@@ -10,6 +10,11 @@
 #include <iostream>
 #include <string>
 
+
+
+#define GAME_NAME "Dracula's Party"
+
+
 //world
 #define TILE_X 0.05625
 #define TILE_Y 0.1
@@ -24,6 +29,10 @@
 #define PLAYER_SCREEN_POS_X 0.45
 #define PLAYER_SCREEN_POS_Y 0.45
 #define PLAYER_SPEED 0.2
+#define PLAYER_INTRO_X 0.2
+#define PLAYER_INTRO_Y 0.2
+#define PLAYER_INTRO_SIZE_X 0.6
+#define PLAYER_INTRO_SIZE_Y 0.6
 
 //npcs
 #define NUM_NPCS 9

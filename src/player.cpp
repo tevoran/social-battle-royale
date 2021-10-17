@@ -1,10 +1,18 @@
 #include "game.hpp"
 
-sbr::player::player()
+
+sbr::player::player(bool intro_toggle)
 {
 	object=TG_new_object(TILE_X, TILE_Y, PLAYER_SCREEN_POS_X, PLAYER_SCREEN_POS_Y, 16);
 	tex=TG_new_texture("assets/PlayerFront.png", false);
 	TG_use_texture_object(object, tex);
+
+	if(intro_toggle)
+	{
+		intro();
+	}
+
+
 }
 
 void sbr::player::render()
