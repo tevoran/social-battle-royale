@@ -12,7 +12,7 @@ namespace sbr
 	public:
 		conversation();
 		~conversation();
-		void make_active(){active_convo=true;};
+		void active(bool is_active){active_convo=is_active;};
 		void render();
 	};
 }

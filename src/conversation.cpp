@@ -17,6 +17,7 @@ sbr::conversation::~conversation()
 
 void sbr::conversation::render()
 {
+	std::cout << "active_convo: " << active_convo << std::endl;
 	if(active_convo)
 	{
 		TG_render_object(win_obj);

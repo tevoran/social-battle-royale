@@ -80,11 +80,19 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 		player.x-=player.dx;
 		player.y-=player.dy;
 		current_conversation=true;
-		convo.make_active();
+		convo.active(current_conversation);
 	}
 	TG_set_position_object(object, pos_x, pos_y);
 
-	//ending a conversation
+	//ending a conversation if distance is too far
+	float a=PLAYER_SCREEN_POS_X-(pos_x-player.x);
+	float b=PLAYER_SCREEN_POS_Y-(pos_y-player.y);
+	float distance=sqrt(a*a+b*b);
+	if(distance>CONVO_END_RADIUS && current_conversation==true)
+	{
+		current_conversation=false;
+		convo.active(current_conversation);
+	}
 
 
 }

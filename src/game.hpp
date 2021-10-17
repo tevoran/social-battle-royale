@@ -26,9 +26,11 @@
 
 //npcs
 #define NUM_NPCS 9
+
+//conversations
 #define CONVO_SIZE_X 1.0
 #define CONVO_SIZE_Y 0.25
-
+#define CONVO_END_RADIUS 0.2
 
 #include "player.hpp"
 #include "world.hpp"
