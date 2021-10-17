@@ -8,7 +8,7 @@ std::string npc_names[]=
 	"Elias",
 	"Abraham",
 	"Alberta",
-	"Hanna",
+	"Johannes",
 	"Nick",
 	"Laura",
 	"Lara",
@@ -31,7 +31,7 @@ sbr::npc::npc(sbr::world& world)
 {
 	//npc sprite
 	object=TG_new_object(TILE_X, TILE_Y, 0.0, 0.0, 1);
-	tex=TG_new_texture("assets/npc.png", false);
+	tex=TG_new_texture("assets/playerF2.png", false);
 	TG_use_texture_object(object, tex);
 
 	//set NPC to random location

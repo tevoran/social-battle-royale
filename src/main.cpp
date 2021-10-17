@@ -23,6 +23,14 @@ int main()
 	sbr::conversation convo;
 
 
+
+	//npc sprite
+	// TG_object *test1=TG_new_object(TILE_X, TILE_Y, 0.05, 0.05, 1);
+	// TG_texture *tex1=TG_new_texture("assets/Player1.png", false);
+	// TG_use_texture_object(test1, tex1);
+
+
+
 	while(!TG_is_key_pressed(SDL_SCANCODE_ESCAPE))
 	{
 		//updates
@@ -41,6 +49,7 @@ int main()
 			npc[i].render(player);
 		}
 		convo.render();
+		// TG_render_object(test1);
 		TG_flip(SEA_COLOR);
 	}
 	TG_quit();
