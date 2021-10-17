@@ -53,7 +53,7 @@ sbr::npc::npc(sbr::world& world)
 
 	//determining sex
 	//if name ends with 'a' then the NPC is female
-	if(name_c_str[name.length()-1]=='a')
+	if(name.c_str()[name.length()-1]=='a')
 	{
 		sex=NPC_FEMALE;
 		std::cout << "female\n";
