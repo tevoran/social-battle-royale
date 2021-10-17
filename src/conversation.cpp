@@ -28,7 +28,17 @@ void sbr::conversation::active(bool is_active)
 
 void sbr::conversation::add_line(std::string string)
 {
-	TG_text *text_tmp=TG_new_text(text_regular, string.c_str(), string.length()*CONVO_LETTER_SIZE, CONVO_TEXT_SIZE_Y, 0.03, 0.15, TEXT_COLOR);
+	float pos_y=
+		(CONVO_SIZE_Y - CONVO_TEXT_SIZE_Y/10.0)
+		 - (CONVO_TEXT_SIZE_Y * (active_texts.size()+1));
+	TG_text *text_tmp=TG_new_text(
+		text_regular, 
+		string.c_str(), 
+		string.length()*CONVO_LETTER_SIZE, 
+		CONVO_TEXT_SIZE_Y, 
+		CONVO_TEXT_LEFT, 
+		pos_y, 
+		TEXT_COLOR);
 	active_texts.emplace_back(text_tmp);
 }
 

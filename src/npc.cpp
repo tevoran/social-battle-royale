@@ -8,7 +8,7 @@ std::string npc_names[]=
 	"Elias",
 	"Abraham",
 	"Alberta",
-	"Hanna",
+	"Alexa",
 	"Nick",
 	"Laura",
 	"Lara",
@@ -79,15 +79,16 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
+
+		if(current_conversation==false)
+		{
+			//greeting
+			std::string greeting("Hello, I am ");
+			std::string complete=greeting+name;
+			convo.add_line(complete);			
+		}
 		current_conversation=true;
 		convo.active(current_conversation);
-
-		//greeting
-		std::string greeting("Hello, I am ");
-		std::string complete=greeting+name;
-
-		std::cout << complete << std::endl;
-		convo.add_line(complete);
 	}
 	TG_set_position_object(object, pos_x, pos_y);
 
