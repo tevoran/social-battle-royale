@@ -15,7 +15,7 @@
 #define TILE_Y 0.1
 #define WORLD_SIZE_X 15
 #define WORLD_SIZE_Y 15
-#define SEA_COLOR 0.179, 0.498, 0.543
+#define SEA_COLOR 0.17, 0.17, 0.17
 
 #define NON_BLOCKED 0
 #define BLOCKED 1

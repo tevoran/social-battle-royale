@@ -5,7 +5,7 @@
 
 sbr::world::world()
 {
-	world_tex=TG_new_texture("assets/world_tiles.png", false);
+	world_tex=TG_new_texture("assets/floorComplete2.png", false);
 
 	for(int ix=0; ix<WORLD_SIZE_X; ix++)
 	{
