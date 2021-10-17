@@ -8,7 +8,11 @@ std::string npc_names[]=
 	"Elias",
 	"Abraham",
 	"Alberta",
+<<<<<<< HEAD
 	"Johannes",
+=======
+	"Alexa",
+>>>>>>> 060af6019bc48a3d7db8b4180b0f8181cf784b6a
 	"Nick",
 	"Laura",
 	"Lara",
@@ -46,9 +50,23 @@ sbr::npc::npc(sbr::world& world)
 	pos_x=TILE_X*tile_x;
 	pos_y=TILE_Y*tile_y;
 
+	//determining traits
 	int random_name=rand()%NUM_NAMES;
 	name=npc_names[random_name];
 	std::cout << "NPC's name is " << name << std::endl;
+
+	//determining sex
+	//if name ends with 'a' then the NPC is female
+	if(name.c_str()[name.length()-1]=='a')
+	{
+		sex=NPC_FEMALE;
+		std::cout << "female\n";
+	}
+	else
+	{
+		sex=NPC_MALE;
+		std::cout << "male\n";
+	}
 }
 
 sbr::npc::~npc()
@@ -79,12 +97,33 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
+
+		//start a conversation
+		if(current_conversation==false)
+		{
+			//greeting
+			std::string greeting("Hello, I am ");
+			std::string complete=greeting+name;
+			convo.add_line(complete);			
+		}
 		current_conversation=true;
-		convo.make_active();
+		convo.active(current_conversation);
 	}
 	TG_set_position_object(object, pos_x, pos_y);
 
-	//ending a conversation
+	//ending a conversation if distance is too far
+	float a=PLAYER_SCREEN_POS_X-(pos_x-player.x);
+	float b=PLAYER_SCREEN_POS_Y-(pos_y-player.y);
+	float distance=sqrt(a*a+b*b);
+	if(distance>CONVO_END_RADIUS && current_conversation==true)
+	{
+		current_conversation=false;
+		convo.active(current_conversation);
+	}
 
-
+	//the actual conversation code
+	if(current_conversation)
+	{
+		#include "npcs/elias.cpp"
+	}
 }
