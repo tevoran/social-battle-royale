@@ -19,7 +19,8 @@ namespace sbr
 		//npc traits
 		std::string name;
 		int sex;
-		
+		bool grumpy;
+
 		//conversations
 		bool current_conversation=false;
 

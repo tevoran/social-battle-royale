@@ -4,6 +4,9 @@
 #define FULL 1920, 1080, true
 #define WIN 1366, 768, false
 
+#define INTRO true
+
+
 int main()
 {
 	TG_init("Social Battle Royale", WIN, 60);
@@ -12,7 +15,7 @@ int main()
 	srand(time(NULL));
 
 	//stuff
-	sbr::player player; 
+	sbr::player player(INTRO); 
 	sbr::world world;
 	std::vector<sbr::npc> npc;
 	for(int i=0; i<NUM_NPCS; i++)
@@ -21,7 +24,6 @@ int main()
 		npc.push_back(tmp_npc);
 	}
 	sbr::conversation convo;
-
 
 
 	//npc sprite

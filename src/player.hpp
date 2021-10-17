@@ -21,9 +21,13 @@ namespace sbr
 		float dx=0;
 		float dy=0;
 
+		//player traits
+		int sex=NPC_FEMALE;
+
 		void update();
 		void render();
-		player();
+		player(bool intro_toggle);
+		void intro();
 		~player();
 	};	
 }

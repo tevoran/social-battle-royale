@@ -120,9 +120,6 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	//the actual conversation code
 	if(current_conversation)
 	{
-		if(!strcmp(name.c_str(), "Elias"))
-		{
-			elias(convo);
-		}
+		
 	}
 }
