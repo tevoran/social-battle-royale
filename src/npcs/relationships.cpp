@@ -13,7 +13,11 @@ int sbr::relationships::add_character()
 	std::vector<int> character_relations;
 	for(int i=0; i<num_participants; i++)
 	{
-		int value=RELATIONSHIP_START;
+		//create random relationship start value
+		int value=
+			RELATIONSHIP_START
+			-RELATIONSHIP_VARIANCE
+			+rand()%(2*RELATIONSHIP_VARIANCE);
 		if(i==character_id)
 		{
 			value=0;
@@ -27,9 +31,9 @@ int sbr::relationships::add_character()
 
 	//add new relationship to existing characters
 	int value=RELATIONSHIP_START;
-	for(int i=0; i<(num_participants-1); i++)
+	for(int i=0; i<(character_id); i++)
 	{
-		relationship_array[i].emplace_back(value);
+		relationship_array[i].emplace_back(relationship_array[character_id][i]);
 	}
 
 	//show values
@@ -44,8 +48,32 @@ int sbr::relationships::add_character()
 			}
 			std::cout << std::endl;
 		}
-	}
-	*/
+	}*/
+	
 	return character_id;
 }
 
+int sbr::relationships::get_status(int current_character_id, int other_character_id)
+{
+	return 	relationship_array[current_character_id][other_character_id];
+}
+
+void sbr::relationships::set_status(
+	int current_character_id, 
+	int other_character_id, 
+	int new_status_value)
+{
+	//the new value has to be written into both characters relationships
+	relationship_array[current_character_id][other_character_id]=new_status_value;
+	relationship_array[other_character_id][current_character_id]=new_status_value;
+}
+
+void sbr::relationships::change_status(
+	int current_character_id, 
+	int other_character_id, 
+	int delta_value)
+{
+	int value=get_status(current_character_id, other_character_id);
+	value+=delta_value;
+	set_status(current_character_id, other_character_id, value);
+}

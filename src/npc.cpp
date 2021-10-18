@@ -64,6 +64,13 @@ sbr::npc::npc(sbr::world& world)
 		std::cout << "male\n";
 	}
 
+	//grumpy
+	grumpy=false;
+	if((rand()%10)>5)
+	{
+		grumpy=true;
+	}
+
 	sbr::relationships& relationships=sbr::relationships::get();
 	character_id=relationships.add_character();
 }
@@ -81,7 +88,7 @@ void sbr::npc::render(sbr::player& player)
 	TG_render_object(object);
 }
 
-void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
+void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 {
 	//collision starts a conversation
 	//don't let player move into the npc
@@ -96,15 +103,7 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
-
-		//start a conversation
-		if(current_conversation==false)
-		{
-			//greeting
-			std::string greeting("Hello, I am ");
-			std::string complete=greeting+name;
-			convo.add_line(complete);			
-		}
+		greeting=true;
 		current_conversation=true;
 		convo.active(current_conversation);
 	}
@@ -121,8 +120,94 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo)
 	}
 
 	//the actual conversation code
+	sbr::relationships& relationships=sbr::relationships::get();
 	if(current_conversation)
 	{
-		
+		//greeting
+		//std::cout << greeting << std::endl;
+		if(greeting && !greeting_active && round==0)
+		{
+			//greeting
+			greeting_active=true;
+			std::string greeting_s("Hello, I am ");
+			std::string complete=greeting_s+name;
+			convo.add_line(complete);
+			convo.add_line(std::string("press <SPACE> to continue"));
+		}
+		if(greeting && TG_is_key_pressed(SDL_SCANCODE_SPACE))
+		{
+			greeting=false; //activate round 1
+			convo.clear();
+		}
+
+		//general activities
+		if(drinking)
+		{
+			if(!drinking_active)
+			{
+				drinking_active=true;
+				convo.clear();
+
+			}
+		}
+
+		//round 1
+		if(	round==0
+			&& !greeting
+			&& !drinking)
+		{
+			//intro
+			if(relationships.get_status(player.character_id, character_id)
+				> RELATIONSHIP_START)
+
+			{
+				if(!intro_active)
+				{
+					convo.add_line(std::string("It's nice to see you."));
+					convo.add_line(std::string("The party seems quite cool so far."));
+					convo.add_line(std::string("press <ENTER> for drinking with ") + name);
+					convo.add_line(std::string("press <SPACE> for kissing with ") + name);
+					relationships.change_status(player.character_id, character_id, 5);
+					intro_active=true;
+				}
+				if(TG_is_key_pressed(SDL_SCANCODE_RETURN))
+				{
+					drinking=true;
+				}
+				if(TG_is_key_pressed(SDL_SCANCODE_SPACE))
+				{
+					//kissing=true;
+				}
+			}
+			else
+			{
+				if(grumpy)
+				{
+					if(!intro_active)
+					{
+						intro_active=true;
+						convo.add_line(std::string("But leave me alone."));
+						relationships.change_status(player.character_id, character_id, -5);
+					}
+				}
+				else
+				{
+					if(!intro_active)
+					{
+						convo.add_line(std::string("But who are you?"));
+						intro_active=true;
+					}
+				}
+			}
+		}
+	}
+	//clear all variables to reset the conversation but not its game effects
+	else
+	{
+		greeting=false;
+		greeting_active=false;
+		intro_active=false;
+		drinking=false;
+		drinking_active=false;
 	}
 }

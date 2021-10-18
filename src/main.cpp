@@ -15,7 +15,8 @@ int main()
 	srand(time(NULL));
 
 	//stuff
-	sbr::player player(INTRO); 
+	int round=0;
+	sbr::player player(INTRO);
 	sbr::world world;
 	std::vector<sbr::npc> npc;
 	for(int i=0; i<NUM_NPCS; i++)
@@ -40,7 +41,7 @@ int main()
 		world.update(player);
 		for(int i=0; i<NUM_NPCS; i++)
 		{
-			npc[i].update(player, convo);
+			npc[i].update(player, convo, round);
 		}
 
 		//render

@@ -19,29 +19,35 @@ namespace sbr
 		//npc traits
 		std::string name;
 		int sex;
+		bool grumpy;
+		bool drunk=false;
+
+
 		bool introvert; //todo
 		int sexuality; //todo
 		bool depressed; //todo
 		bool has_partner; //todo
 		bool poor; //todo
-		bool drunk; //todo
 		float attractivity; //todo
-
-		//relationships
-		int character_id;
-
 
 		//conversations
 		bool current_conversation=false;
 
+		bool greeting=false;
+		bool greeting_active=false;
+		bool intro_active=false;
+		bool drinking=false;
+		bool drinking_active=false;
 	public:
+		//relationships
+		int character_id;
+
 		npc(sbr::world& world);
 		~npc();
 		void render(sbr::player& player);
-		void update(sbr::player& player, sbr::conversation& convo);
+		void update(sbr::player& player, sbr::conversation& convo, int round);
 
-		//npc convo implementations
-		void elias(sbr::conversation& convo);
+
 	};
 }
 

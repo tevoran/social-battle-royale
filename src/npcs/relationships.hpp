@@ -3,8 +3,7 @@
 
 #include <game.hpp>
 
-#define RELATIONSHIP_MAX 100
-#define RELATIONSHIP_START 50
+
 
 //all characters should join the game before it starts
 //this is a big assumption in the code
@@ -22,9 +21,15 @@ namespace sbr
 	public:
 		~relationships(){};
 		relationships(const relationships&) = delete; //remove copyconstructor
-
 		static relationships& get(){static relationships instance; return instance;};
+
 		int add_character();
+
+		//interactions
+		//returns the relationship value between the current and the other character
+		int get_status(int current_character_id, int other_character_id);
+		void set_status(int current_character_id, int other_character_id, int new_status_value);
+		void change_status(int current_character_id, int other_character_id, int delta_value);
 	};
 }
 

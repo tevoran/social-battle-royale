@@ -38,6 +38,9 @@
 #define NUM_NPCS 9
 #define NPC_MALE 0
 #define NPC_FEMALE 1
+#define RELATIONSHIP_MAX 100
+#define RELATIONSHIP_START 50
+#define RELATIONSHIP_VARIANCE 10 //The variance of the RELATIONSHIP_START value
 
 //conversations
 #define CONVO_SIZE_X 1.0
