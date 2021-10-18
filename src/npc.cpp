@@ -63,6 +63,9 @@ sbr::npc::npc(sbr::world& world)
 		sex=NPC_MALE;
 		std::cout << "male\n";
 	}
+
+	sbr::relationships& relationships=sbr::relationships::get();
+	character_id=relationships.add_character();
 }
 
 sbr::npc::~npc()

@@ -19,7 +19,17 @@ namespace sbr
 		//npc traits
 		std::string name;
 		int sex;
-		bool grumpy;
+		bool introvert; //todo
+		int sexuality; //todo
+		bool depressed; //todo
+		bool has_partner; //todo
+		bool poor; //todo
+		bool drunk; //todo
+		float attractivity; //todo
+
+		//relationships
+		int character_id;
+
 
 		//conversations
 		bool current_conversation=false;

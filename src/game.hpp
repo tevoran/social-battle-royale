@@ -51,6 +51,7 @@
 
 #include "player.hpp"
 #include "world.hpp"
+#include "npcs/relationships.hpp"
 #include "conversation.hpp"
 #include "npc.hpp"
 
