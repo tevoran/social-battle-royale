@@ -66,7 +66,7 @@ sbr::npc::npc(sbr::world& world)
 
 	//grumpy
 	grumpy=false;
-	if((rand()%100)>5)
+	if((rand()%9)>5)
 	{
 		grumpy=true;
 	}
@@ -217,6 +217,7 @@ void sbr::npc::set_up_conversation_list()
 	sbr::convo_element greeting1;
 		greeting1.active_element=true;
 		greeting1.text1=std::string("Hello, I am ") + name;
+		greeting1.text2=std::string("Nice to see you here.");
 		greeting1.relationship_value_delta=2;
 		greeting1.ID=1;
 	convo_element_list.push_back(greeting1);
