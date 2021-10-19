@@ -66,17 +66,18 @@ sbr::npc::npc(sbr::world& world)
 
 	//grumpy
 	grumpy=false;
-	if((rand()%10)>5)
+	if((rand()%100)>5)
 	{
 		grumpy=true;
 	}
 
 	//introvert or extrovert
 	introvert=false;
-	if((rand()%10)>5)
+	if((rand()%12)>5)
 	{
 		introvert=true;
 	}
+	std::cout << "NPC is introvert " << introvert << std::endl;
 
 	//setting up relationship network
 	sbr::relationships& relationships=sbr::relationships::get();
@@ -114,7 +115,6 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
-		//greeting=true;
 		current_conversation=true;
 		convo.active(current_conversation);
 	}
@@ -126,6 +126,7 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 	float distance=sqrt(a*a+b*b);
 	if(distance>CONVO_END_RADIUS && current_conversation==true)
 	{
+		current_element.active_element=false;
 		current_conversation=false;
 		convo.active(current_conversation);
 	}
@@ -145,19 +146,48 @@ void sbr::npc::do_conversation(sbr::conversation& convo, sbr::player& player, in
 	//looking for first matching conversation entry
 	if(current_element.active_element==false)
 	{
+		//going from very specific to least specific
 		for(int i=0; i<convo_element_list.size(); i++)
 		{
-			if(	convo_element_list[i].cond_round==round ||
-				convo_element_list[i].cond_round==CONVO_ELEMENT_CONDITION_IRRELEVANT ||
-				convo_element_list[i].cond_min_relationship_value < relationships.get_status(player.character_id, character_id) ||
-				convo_element_list[i].cond_min_relationship_value == CONVO_ELEMENT_CONDITION_IRRELEVANT ||
-				convo_element_list[i].cond_max_relationship_value > relationships.get_status(player.character_id, character_id) ||
-				convo_element_list[i].cond_max_relationship_value == CONVO_ELEMENT_CONDITION_IRRELEVANT
-				)
+			//use round specific elements
+			if( convo_element_list[i].cond_round==round)
 			{
-				current_element=convo_element_list[i];
+				//introvert
+				if(	convo_element_list[i].cond_introvert==true
+					&& introvert==true)
+				{
+					current_element=convo_element_list[i];
+				}
+				//grumpy
+				if(	convo_element_list[i].cond_grumpy==true
+					&& grumpy==true)
+				{
+					current_element=convo_element_list[i];
+					break;
+				}
 			}
 
+			//use non round specific elements
+			if( convo_element_list[i].cond_round==CONVO_ELEMENT_CONDITION_IRRELEVANT)
+			{
+
+			}
+
+		}
+
+		//if no element has been found, simply display the first one
+		if(current_element.active_element==false)
+		{
+			current_element=convo_element_list[0];
+		}
+
+		//update effects that are caused by the element
+		if(current_element.relationship_value_delta!=CONVO_ELEMENT_CONDITION_IRRELEVANT)
+		{
+			relationships.change_status(
+				player.character_id, 
+				character_id, 
+				current_element.relationship_value_delta);
 		}
 	}
 
@@ -184,46 +214,31 @@ void sbr::npc::do_conversation(sbr::conversation& convo, sbr::player& player, in
 void sbr::npc::set_up_conversation_list()
 {
 	//greeting1
-	sbr::convo_element greeting1(
-		std::string("Hello, I am ") + name,
-		std::string(" "),
-		false,
-		1,
-		0,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		1,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		false,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		std::string(" "),
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		std::string(" "),
-		CONVO_ELEMENT_CONDITION_IRRELEVANT
-		);	
+	sbr::convo_element greeting1;
+		greeting1.active_element=true;
+		greeting1.text1=std::string("Hello, I am ") + name;
+		greeting1.relationship_value_delta=2;
+		greeting1.ID=1;
 	convo_element_list.push_back(greeting1);
 
-	sbr::convo_element greeting2(
-		std::string("Hello, I am ") + name,
-		std::string(" "),
-		false,
-		1,
-		0,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		1,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		false,
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		std::string(" "),
-		CONVO_ELEMENT_CONDITION_IRRELEVANT,
-		std::string(" "),
-		CONVO_ELEMENT_CONDITION_IRRELEVANT
-		);
+	//greeting introvert
+	sbr::convo_element greeting_introvert;
+		greeting_introvert.active_element=true;
+		greeting_introvert.text1=std::string("Hello, I am ") + name;
+		greeting_introvert.text2=std::string("I am not sure if I will like this party.");
+		greeting_introvert.cond_introvert=true;
+		greeting_introvert.cond_round=0;
+		greeting_introvert.ID=2;
+	convo_element_list.push_back(greeting_introvert);
+
+	//greeting grumpy
+	sbr::convo_element greeting_grumpy;
+		greeting_grumpy.active_element=true;
+		greeting_grumpy.text1=std::string("I am ") + name;
+		greeting_grumpy.text2=std::string("But leave me alone.");
+		greeting_grumpy.cond_round=0;
+		greeting_grumpy.cond_grumpy=true;
+		greeting_grumpy.relationship_value_delta=-2;
+		greeting_grumpy.ID=3;
+	convo_element_list.push_back(greeting_grumpy);
 }

@@ -29,24 +29,25 @@ namespace sbr
 		bool active_element;
 		std::string text1; //first line shown
 		std::string text2; //second line shown
-		bool once;
+		bool once=false;
 		bool was_active=false;
 		int ID;
 
 		//conditions
-		int cond_round;
-		int cond_min_relationship_value;
-		int cond_max_relationship_value;
-		int cond_grumpy;
-		int cond_drunk;
+		int cond_round=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int cond_min_relationship_value=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int cond_max_relationship_value=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int cond_grumpy=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int cond_drunk=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int cond_introvert=CONVO_ELEMENT_CONDITION_IRRELEVANT;
 
 		//effects while using this element
-		int relationship_value_delta;
-		int grumpy;
-		int drunk;
+		int relationship_value_delta=0;
+		int grumpy=CONVO_ELEMENT_CONDITION_IRRELEVANT;
+		int drunk=CONVO_ELEMENT_CONDITION_IRRELEVANT;
 
 		//choices
-		bool choices;
+		bool choices=false;
 		int follow_up_ID; //if no choice then use the follow_up_ID
 		//choice 1
 		//use ENTER/RETURN key
@@ -58,7 +59,12 @@ namespace sbr
 		std::string text_choice2;
 		int choice2_follow_up_ID;
 
-		convo_element(){active_element=false;};
+		convo_element(){
+			active_element=false;
+			text2=std::string(" ");
+			text_choice1=std::string(" ");
+			text_choice2=std::string(" ");
+		};
 		convo_element(
 			std::string text1_in,
 			std::string text2_in,
@@ -69,6 +75,7 @@ namespace sbr
 			int cond_max_relationship_value_in,
 			int cond_grumpy_in,
 			int cond_drunk_in,
+			int cond_introvert_in,
 			int relationship_value_delta_in,
 			int grumpy_in,
 			int drunk_in,
@@ -89,6 +96,8 @@ namespace sbr
 			cond_max_relationship_value=cond_max_relationship_value_in;
 			cond_grumpy=cond_grumpy_in;
 			cond_drunk=cond_drunk_in;
+			cond_introvert=cond_introvert_in;
+			relationship_value_delta=relationship_value_delta_in;
 			choices=choices_in;
 			follow_up_ID=follow_up_ID_in;
 			text_choice1=text_choice1_in;
