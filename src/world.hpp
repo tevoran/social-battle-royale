@@ -12,6 +12,7 @@ namespace sbr
 		TG_object *tile[WORLD_SIZE_X][WORLD_SIZE_Y];
 		int tile_block[WORLD_SIZE_X][WORLD_SIZE_Y];
 		TG_texture *world_tex;
+		TG_texture *wallMiddle_tex;
 	public:
 		void update(sbr::player& player);
 		void render(sbr::player& player);

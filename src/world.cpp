@@ -1,11 +1,12 @@
 #include "game.hpp"
 #include <TGJGE.h>
 
-#define NUM_DIF_TILES 9
+#define NUM_DIF_TILES 1
 
 sbr::world::world()
 {
 	world_tex=TG_new_texture("assets/floorComplete2.png", false);
+	wallMiddle_tex=TG_new_texture("assets/wallMiddle.png", false);
 
 	for(int ix=0; ix<WORLD_SIZE_X; ix++)
 	{
@@ -20,24 +21,19 @@ sbr::world::world()
 				NUM_DIF_TILES);
 			TG_use_texture_object(tile[iy][ix], world_tex);
 			
-			//using a mid tile as default
-			TG_start_animation_object(
-				tile[iy][ix],
-				9, 
-				9, 
-				0,
-				false);
 
 
 			//left side
 			if(ix==0)
 			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					1, 
-					1, 
-					0,
-					false);
+				TG_use_texture_object(tile[iy][ix], wallMiddle_tex);
+				set_block(ix, iy);
+			}
+
+			//left side
+			if(ix==0 && iy==5)
+			{
+				TG_use_texture_object(tile[iy][ix], wallMiddle_tex);
 			}
 
 

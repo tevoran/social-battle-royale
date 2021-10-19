@@ -9,7 +9,7 @@
 
 int main()
 {
-	TG_init("Social Battle Royale", WIN, 60);
+	TG_init("Social Battle Royale", FULL, 60);
 
 	//init stuff
 	srand(time(NULL));
