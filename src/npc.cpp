@@ -195,6 +195,7 @@ void sbr::npc::do_conversation(sbr::conversation& convo, sbr::player& player, in
 	//then display element and wait for player choice
 	else
 	{
+		//display
 		convo.clear();
 		convo.add_line(current_element.text1);
 		convo.add_line(current_element.text2);
@@ -207,19 +208,76 @@ void sbr::npc::do_conversation(sbr::conversation& convo, sbr::player& player, in
 		{
 			convo.add_line("press <SPACE> to continue");
 		}
+
+		//wait for input
+		static bool key_down=false;
+		if(TG_is_key_pressed(SDL_SCANCODE_SPACE) && !current_element.choices && !key_down)
+		{
+			key_down=true;
+			//looking for follow up entry
+			for(int i=0; i<convo_element_list.size(); i++)
+			{
+				if(convo_element_list[i].ID==current_element.follow_up_ID)
+				{
+					current_element=convo_element_list[i];
+					break;
+				}
+			}
+		}
+
+		if(TG_is_key_pressed(SDL_SCANCODE_RETURN) && current_element.choices && !key_down)
+		{
+			key_down=true;
+			//looking for follow up entry
+			for(int i=0; i<convo_element_list.size(); i++)
+			{
+				if(convo_element_list[i].ID==current_element.choice1_follow_up_ID)
+				{
+					current_element=convo_element_list[i];
+					break;
+				}
+			}
+		}
+
+		if(TG_is_key_pressed(SDL_SCANCODE_SPACE) && current_element.choices && !key_down)
+		{
+			key_down=true;
+			//looking for follow up entry
+			for(int i=0; i<convo_element_list.size(); i++)
+			{
+				if(convo_element_list[i].ID==current_element.choice2_follow_up_ID)
+				{
+					current_element=convo_element_list[i];
+					break;
+				}
+			}
+		}
+
+		//reset key_down
+		if(	!TG_is_key_pressed(SDL_SCANCODE_SPACE) &&
+			!TG_is_key_pressed(SDL_SCANCODE_RETURN))
+		{
+			key_down=false;
+		}
 	}
 
 }
 
 void sbr::npc::set_up_conversation_list()
 {
+	#define REGULAR_GREETING 1
+	#define INTROVERT_GREETING 2
+	#define GRUMPY_GREETING 3
+	#define END 4
+	#define FUCK 5
 	//greeting1
 	sbr::convo_element greeting1;
 		greeting1.active_element=true;
 		greeting1.text1=std::string("Hello, I am ") + name;
 		greeting1.text2=std::string("Nice to see you here.");
 		greeting1.relationship_value_delta=2;
-		greeting1.ID=1;
+		greeting1.ID=REGULAR_GREETING;
+		greeting1.follow_up_ID=END;
 	convo_element_list.push_back(greeting1);
 
 	//greeting introvert
@@ -229,7 +287,8 @@ void sbr::npc::set_up_conversation_list()
 		greeting_introvert.text2=std::string("I am not sure if I will like this party.");
 		greeting_introvert.cond_introvert=true;
 		greeting_introvert.cond_round=0;
-		greeting_introvert.ID=2;
+		greeting_introvert.ID=INTROVERT_GREETING;
+		greeting_introvert.follow_up_ID=END;
 	convo_element_list.push_back(greeting_introvert);
 
 	//greeting grumpy
@@ -240,6 +299,29 @@ void sbr::npc::set_up_conversation_list()
 		greeting_grumpy.cond_round=0;
 		greeting_grumpy.cond_grumpy=true;
 		greeting_grumpy.relationship_value_delta=-2;
-		greeting_grumpy.ID=3;
+		greeting_grumpy.choices=true;
+		greeting_grumpy.ID=GRUMPY_GREETING;
+		greeting_grumpy.text_choice1=std::string("press <RETURN> for insulting ") + name;
+		greeting_grumpy.choice1_follow_up_ID=FUCK;
+		greeting_grumpy.text_choice2=std::string("press <SPACE> for calming down ") + name;
+		greeting_grumpy.choice2_follow_up_ID=END;
 	convo_element_list.push_back(greeting_grumpy);
+
+	//end response
+	sbr::convo_element end;
+		end.active_element=true;
+		end.text1=std::string("See you.");
+		end.ID=END;
+		end.follow_up_ID=END; //repeat the response
+	convo_element_list.push_back(end);	
+
+	//fuck you
+	sbr::convo_element fuck;
+		fuck.active_element=true;
+		fuck.text1=std::string("Fuck you!");
+		fuck.text2=std::string("Leave me alone!");
+		fuck.relationship_value_delta=-5;
+		fuck.ID=FUCK;
+		fuck.follow_up_ID=FUCK; //repeat the response
+	convo_element_list.push_back(fuck);
 }
