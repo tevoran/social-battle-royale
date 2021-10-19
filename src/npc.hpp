@@ -32,17 +32,11 @@ namespace sbr
 		//conversations
 		bool current_conversation=false;
 		std::vector<sbr::convo_element> convo_element_list;
+		sbr::convo_element current_element; //conversation is at this element right now
+
 
 		void set_up_conversation_list();
-		void do_conversation(sbr::conversation& convo, int round);
-/*		bool busy=false;
-
-		bool greeting=false;
-		bool greeting_active=false;
-		bool intro_active=false;
-		bool drinking=false;
-		bool drinking_active=false;
-*/
+		void do_conversation(sbr::conversation& convo, sbr::player& player, int round);
 	public:
 		//relationships
 		int character_id;

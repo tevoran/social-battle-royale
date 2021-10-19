@@ -26,6 +26,7 @@ namespace sbr
 	class convo_element
 	{
 	public:
+		bool active_element;
 		std::string text1; //first line shown
 		std::string text2; //second line shown
 		bool once;
@@ -57,6 +58,7 @@ namespace sbr
 		std::string text_choice2;
 		int choice2_follow_up_ID;
 
+		convo_element(){active_element=false;};
 		convo_element(
 			std::string text1_in,
 			std::string text2_in,
@@ -77,6 +79,7 @@ namespace sbr
 			std::string text_choice2_in,
 			int choice2_follow_up_ID_in)
 		{
+			active_element=true;
 			text1=text1_in;
 			text2=text2_in;
 			once=once_in;

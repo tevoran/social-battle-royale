@@ -47,8 +47,8 @@ void sbr::conversation::clear()
 	for(int i=0; i<active_texts.size(); i++)
 	{
 		TG_destroy_text(active_texts[i]);
-		active_texts.clear();
 	}
+	active_texts.clear();
 }
 
 void sbr::conversation::render()
