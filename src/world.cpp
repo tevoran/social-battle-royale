@@ -28,86 +28,86 @@ sbr::world::world()
 				0,
 				false);
 
-			//left bottom tile
-			if(ix==0 && iy==0)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					8, 
-					8, 
-					0,
-					false);
-			}
-			//left tile
-			if(ix==0 && iy!=0)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					1, 
-					1, 
-					0,
-					false);
-			}
-			//left top tile
-			if(ix==0 && iy==WORLD_SIZE_Y-1)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					2, 
-					2, 
-					0,
-					false);
-			}
-			//top tile
-			if(ix!=0 && iy==WORLD_SIZE_Y-1)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					3, 
-					3, 
-					0,
-					false);
-			}
-			//right top tile
-			if(ix==WORLD_SIZE_X-1 && iy==WORLD_SIZE_Y-1)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					4, 
-					4, 
-					0,
-					false);
-			}
-			//right tile
-			if(ix==WORLD_SIZE_X-1 && iy!=WORLD_SIZE_Y-1)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					5, 
-					5, 
-					0,
-					false);
-			}
-			//right bottom tile
-			if(ix==WORLD_SIZE_X-1 && iy==0)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					6, 
-					6, 
-					0,
-					false);
-			}
-			//bottom tile
-			if(ix!=WORLD_SIZE_X-1 && ix!=0 && iy==0)
-			{
-				TG_start_animation_object(
-					tile[iy][ix],
-					7, 
-					7, 
-					0,
-					false);
-			}
+			// //left bottom tile
+			// if(ix==0 && iy==0)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		8, 
+			// 		8, 
+			// 		0,
+			// 		false);
+			// }
+			// //left tile
+			// if(ix==0 && iy!=0)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		1, 
+			// 		1, 
+			// 		0,
+			// 		false);
+			// }
+			// //left top tile
+			// if(ix==0 && iy==WORLD_SIZE_Y-1)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		2, 
+			// 		2, 
+			// 		0,
+			// 		false);
+			// }
+			// //top tile
+			// if(ix!=0 && iy==WORLD_SIZE_Y-1)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		3, 
+			// 		3, 
+			// 		0,
+			// 		false);
+			// }
+			// //right top tile
+			// if(ix==WORLD_SIZE_X-1 && iy==WORLD_SIZE_Y-1)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		4, 
+			// 		4, 
+			// 		0,
+			// 		false);
+			// }
+			// //right tile
+			// if(ix==WORLD_SIZE_X-1 && iy!=WORLD_SIZE_Y-1)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		5, 
+			// 		5, 
+			// 		0,
+			// 		false);
+			// }
+			// //right bottom tile
+			// if(ix==WORLD_SIZE_X-1 && iy==0)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		6, 
+			// 		6, 
+			// 		0,
+			// 		false);
+			// }
+			// //bottom tile
+			// if(ix!=WORLD_SIZE_X-1 && ix!=0 && iy==0)
+			// {
+			// 	TG_start_animation_object(
+			// 		tile[iy][ix],
+			// 		7, 
+			// 		7, 
+			// 		0,
+			// 		false);
+			// }
 		}
 	}
 }
