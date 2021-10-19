@@ -28,6 +28,21 @@ sbr::world::world()
 				0,
 				false);
 
+
+			//left side
+			if(ix==0)
+			{
+				TG_start_animation_object(
+					tile[iy][ix],
+					1, 
+					1, 
+					0,
+					false);
+			}
+
+
+
+
 			// //left bottom tile
 			// if(ix==0 && iy==0)
 			// {
