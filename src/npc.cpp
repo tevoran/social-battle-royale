@@ -71,8 +71,19 @@ sbr::npc::npc(sbr::world& world)
 		grumpy=true;
 	}
 
+	//introvert or extrovert
+	introvert=false;
+	if((rand()%10)>5)
+	{
+		introvert=true;
+	}
+
+	//setting up relationship network
 	sbr::relationships& relationships=sbr::relationships::get();
 	character_id=relationships.add_character();
+
+	//setting up conversation database for the NPC
+	set_up_conversation_list();
 }
 
 sbr::npc::~npc()
@@ -103,7 +114,7 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 	{
 		player.x-=player.dx;
 		player.y-=player.dy;
-		greeting=true;
+		//greeting=true;
 		current_conversation=true;
 		convo.active(current_conversation);
 	}
@@ -123,39 +134,49 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 	sbr::relationships& relationships=sbr::relationships::get();
 	if(current_conversation)
 	{
+		do_conversation(convo, round);
+	}
+/*	if(current_conversation)
+	{
+		busy=false; //use the first available interaction
+
 		//greeting
 		//std::cout << greeting << std::endl;
-		if(greeting && !greeting_active && round==0)
+		if(greeting && !greeting_active && round==0 && !busy)
 		{
 			//greeting
+			busy=true;
 			greeting_active=true;
+			intro_active=true;
 			std::string greeting_s("Hello, I am ");
 			std::string complete=greeting_s+name;
 			convo.add_line(complete);
 			convo.add_line(std::string("press <SPACE> to continue"));
 		}
-		if(greeting && TG_is_key_pressed(SDL_SCANCODE_SPACE))
+		if(greeting && TG_is_key_pressed(SDL_SCANCODE_SPACE) && greeting_active)
 		{
 			greeting=false; //activate round 1
+			intro_active=false;
 			convo.clear();
 		}
 
 		//general activities
-		if(drinking)
+		if(drinking && !busy)
 		{
+			busy=true;
 			if(!drinking_active)
 			{
 				drinking_active=true;
-				convo.clear();
+				//convo.clear();
 
 			}
 		}
 
 		//round 1
 		if(	round==0
-			&& !greeting
-			&& !drinking)
+			&& !busy)
 		{
+			busy=true;
 			//intro
 			if(relationships.get_status(player.character_id, character_id)
 				> RELATIONSHIP_START)
@@ -195,12 +216,15 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 					if(!intro_active)
 					{
 						convo.add_line(std::string("But who are you?"));
+						convo.add_line(std::string("press <ENTER> to introduce yourself"));
+						convo.add_line(std::string("press <SPACE> to ask ") + name);
 						intro_active=true;
 					}
 				}
 			}
 		}
 	}
+
 	//clear all variables to reset the conversation but not its game effects
 	else
 	{
@@ -210,4 +234,48 @@ void sbr::npc::update(sbr::player& player, sbr::conversation& convo, int round)
 		drinking=false;
 		drinking_active=false;
 	}
+*/
+}
+
+void sbr::npc::do_conversation(sbr::conversation& convo, int round)
+{
+	//looking for first matching conversation entry
+	for(int i=0; i<convo_element_list.size(); i++)
+	{
+		sbr::convo_element current_element=convo_element_list[i];
+
+		if(	current_element.cond_round==round
+			|| current_element.cond_round==CONVO_ELEMENT_CONDITION_IRRELEVANT)
+		{
+			convo.clear();
+			convo.add_line(current_element.text1);
+			convo.add_line(current_element.text2);
+		}
+	}
+}
+
+void sbr::npc::set_up_conversation_list()
+{
+	sbr::convo_element tmp_element(
+		std::string("Hello, I am ") + name,
+		std::string(" "),
+		false,
+		1,
+		0,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		1,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		false,
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		std::string(" "),
+		CONVO_ELEMENT_CONDITION_IRRELEVANT,
+		std::string(" "),
+		CONVO_ELEMENT_CONDITION_IRRELEVANT
+		);
+	
+	convo_element_list.push_back(tmp_element);
 }

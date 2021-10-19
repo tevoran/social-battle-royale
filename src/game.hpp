@@ -41,6 +41,7 @@
 #define RELATIONSHIP_MAX 100
 #define RELATIONSHIP_START 50
 #define RELATIONSHIP_VARIANCE 10 //The variance of the RELATIONSHIP_START value
+#define CONVO_ELEMENT_CONDITION_IRRELEVANT 0xFFFFFFFF
 
 //conversations
 #define CONVO_SIZE_X 1.0
@@ -57,5 +58,6 @@
 #include "npcs/relationships.hpp"
 #include "conversation.hpp"
 #include "npc.hpp"
+#include "npcs/conversation_logic.hpp"
 
 #endif

@@ -21,9 +21,8 @@ namespace sbr
 		int sex;
 		bool grumpy;
 		bool drunk=false;
+		bool introvert;
 
-
-		bool introvert; //todo
 		int sexuality; //todo
 		bool depressed; //todo
 		bool has_partner; //todo
@@ -32,12 +31,18 @@ namespace sbr
 
 		//conversations
 		bool current_conversation=false;
+		std::vector<sbr::convo_element> convo_element_list;
+
+		void set_up_conversation_list();
+		void do_conversation(sbr::conversation& convo, int round);
+/*		bool busy=false;
 
 		bool greeting=false;
 		bool greeting_active=false;
 		bool intro_active=false;
 		bool drinking=false;
 		bool drinking_active=false;
+*/
 	public:
 		//relationships
 		int character_id;
