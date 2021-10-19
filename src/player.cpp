@@ -12,7 +12,8 @@ sbr::player::player(bool intro_toggle)
 		intro();
 	}
 
-
+	sbr::relationships& relationships=sbr::relationships::get();
+	character_id=relationships.add_character();
 }
 
 void sbr::player::render()

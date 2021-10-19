@@ -24,6 +24,8 @@ namespace sbr
 		//player traits
 		int sex=NPC_FEMALE;
 
+		//relationships
+		int character_id;
 		void update();
 		void render();
 		player(bool intro_toggle);
