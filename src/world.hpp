@@ -9,8 +9,8 @@ namespace sbr
 	private:
 		float pos_x=0;
 		float pos_y=0;
-		TG_object *tile[WORLD_SIZE_X][WORLD_SIZE_Y];
-		int tile_block[WORLD_SIZE_X][WORLD_SIZE_Y];
+		TG_object *tile[WORLD_SIZE_Y][WORLD_SIZE_X];
+		int tile_block[WORLD_SIZE_Y][WORLD_SIZE_X];
 		TG_texture *world_tex;
 		TG_texture *wallMiddle_tex;
 	public:

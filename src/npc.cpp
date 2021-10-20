@@ -208,6 +208,7 @@ void sbr::npc::do_conversation(sbr::conversation& convo, sbr::player& player, in
 		{
 			convo.add_line("press <SPACE> to continue");
 		}
+		convo.add_line(" "); //dummy
 
 		//wait for input
 		static bool key_down=false;

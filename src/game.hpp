@@ -18,8 +18,8 @@
 //world
 #define TILE_X 0.05625
 #define TILE_Y 0.1
-#define WORLD_SIZE_X 15
-#define WORLD_SIZE_Y 15
+#define WORLD_SIZE_X 5
+#define WORLD_SIZE_Y 20
 #define SEA_COLOR 0.17, 0.17, 0.17
 
 #define NON_BLOCKED 0
