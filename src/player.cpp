@@ -5,7 +5,7 @@ sbr::player::player(bool intro_toggle)
 {
 	object=TG_new_object(TILE_X, TILE_Y, PLAYER_SCREEN_POS_X, PLAYER_SCREEN_POS_Y);
 	tex=TG_new_texture("assets/PlayerComplete.png", 16, false);
-	TG_use_texture_object(object, tex);
+	TG_object_use_texture(object, tex);
 
 	if(intro_toggle)
 	{
@@ -53,7 +53,7 @@ void sbr::player::update()
 		!TG_is_key_pressed(SDL_SCANCODE_D) &&
 		!TG_is_key_pressed(SDL_SCANCODE_A))
 	{
-		TG_stop_animation_object(object);
+		TG_object_stop_animation(object);
 		animated=false;
 	}
 
@@ -69,7 +69,7 @@ void sbr::player::update()
 		if(!animated)
 		{
 			animated=true;
-			TG_start_animation_object(object, 1, 4, 175, 1);
+			TG_object_start_animation(object, 1, 4, 175, 1);
 		}
 	}
 }

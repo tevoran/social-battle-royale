@@ -18,21 +18,21 @@ sbr::world::world()
 				TILE_Y,
 				TILE_X*ix,
 				TILE_Y*iy);
-			TG_use_texture_object(tile[iy][ix], world_tex);
+			TG_object_use_texture(tile[iy][ix], world_tex);
 			
 
 
 			//left side
 			if(ix==0 || ix==WORLD_SIZE_X-1)
 			{
-				TG_use_texture_object(tile[iy][ix], wallMiddle_tex);
+				TG_object_use_texture(tile[iy][ix], wallMiddle_tex);
 				set_block(ix, iy);
 			}
 
 			//left side
 			if(ix==0 && iy==5)
 			{
-				TG_use_texture_object(tile[iy][ix], wallMiddle_tex);
+				TG_object_use_texture(tile[iy][ix], wallMiddle_tex);
 			}
 
 
