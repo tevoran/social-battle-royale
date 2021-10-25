@@ -5,8 +5,8 @@
 
 sbr::world::world()
 {
-	world_tex=TG_new_texture("assets/floorComplete2.png", false);
-	wallMiddle_tex=TG_new_texture("assets/wallMiddle.png", false);
+	world_tex=TG_new_texture("assets/floorComplete2.png", 1, false);
+	wallMiddle_tex=TG_new_texture("assets/wallMiddle.png", 1, false);
 
 	for(int ix=0; ix<WORLD_SIZE_X; ix++)
 	{
@@ -17,14 +17,13 @@ sbr::world::world()
 				TILE_X,
 				TILE_Y,
 				TILE_X*ix,
-				TILE_Y*iy,
-				NUM_DIF_TILES);
+				TILE_Y*iy);
 			TG_use_texture_object(tile[iy][ix], world_tex);
 			
 
 
 			//left side
-			if(ix==0)
+			if(ix==0 || ix==WORLD_SIZE_X-1)
 			{
 				TG_use_texture_object(tile[iy][ix], wallMiddle_tex);
 				set_block(ix, iy);
@@ -159,6 +158,21 @@ void sbr::world::update(sbr::player& player)
 	{
 		player.y=(WORLD_SIZE_Y-1)*TILE_Y-PLAYER_SCREEN_POS_Y;
 	}
+
+	//don't let the player move into blocked tiles
+	//convert player position into tile locations
+	
+	int tile_x=(player.x+PLAYER_SCREEN_POS_X+2*player.dx)/TILE_X;
+	int tile_y=(player.y+PLAYER_SCREEN_POS_Y+2*player.dy)/TILE_Y;
+	bool collision=false;
+	if(	TG_is_colliding(player.object, tile[tile_y][tile_x]) &&
+		!is_free(tile_x, tile_y))
+	{
+		collision=true;
+		player.x-=player.dx;
+		player.y-=player.dy;
+	}
+	std::cout << tile_x << "x" << tile_y << " collision: " << collision << std::endl;
 }
 
 //true if free

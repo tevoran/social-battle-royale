@@ -4,8 +4,8 @@
 sbr::conversation::conversation()
 {
 	//window sprite
-	win_obj=TG_new_object(CONVO_SIZE_X, CONVO_SIZE_Y, 0.0, 0.0, 1);
-	win_tex=TG_new_texture("assets/window.png", false);
+	win_obj=TG_new_object(CONVO_SIZE_X, CONVO_SIZE_Y, 0.0, 0.0);
+	win_tex=TG_new_texture("assets/window.png", 1, false);
 	TG_use_texture_object(win_obj, win_tex);
 
 	text_regular=TG_new_font("assets/Itim-Regular.otf", 30);

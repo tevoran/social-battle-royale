@@ -7,8 +7,8 @@
 void sbr::player::intro()
 {
 	TG_object *win_obj=TG_new_object(
-		PLAYER_INTRO_SIZE_X, PLAYER_INTRO_SIZE_Y, PLAYER_INTRO_X, PLAYER_INTRO_Y, 1);
-	TG_texture *win_tex=TG_new_texture("assets/window.png", false);
+		PLAYER_INTRO_SIZE_X, PLAYER_INTRO_SIZE_Y, PLAYER_INTRO_X, PLAYER_INTRO_Y);
+	TG_texture *win_tex=TG_new_texture("assets/window.png", 1, false);
 	TG_use_texture_object(win_obj, win_tex);
 	TG_font *text_regular=TG_new_font("assets/Itim-Regular.otf", 30);
 

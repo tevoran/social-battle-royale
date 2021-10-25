@@ -3,8 +3,8 @@
 
 sbr::player::player(bool intro_toggle)
 {
-	object=TG_new_object(TILE_X, TILE_Y, PLAYER_SCREEN_POS_X, PLAYER_SCREEN_POS_Y, 16);
-	tex=TG_new_texture("assets/PlayerComplete.png", false);
+	object=TG_new_object(TILE_X, TILE_Y, PLAYER_SCREEN_POS_X, PLAYER_SCREEN_POS_Y);
+	tex=TG_new_texture("assets/PlayerComplete.png", 16, false);
 	TG_use_texture_object(object, tex);
 
 	if(intro_toggle)
