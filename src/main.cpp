@@ -10,7 +10,8 @@
 int main()
 {
 	TG_init("Social Battle Royale", FULL, 60);
-
+	TG_show_cursor(false);
+	
 	//init stuff
 	srand(time(NULL));
 
@@ -53,7 +54,7 @@ int main()
 		}
 		convo.render();
 		// TG_render_object(test1);
-		TG_flip(SEA_COLOR);
+		TG_new_frame(SEA_COLOR);
 	}
 	TG_quit();
 	return 0;

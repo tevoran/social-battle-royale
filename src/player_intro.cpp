@@ -332,7 +332,7 @@ void sbr::player::intro()
 			key_down=false;
 		}
 
-		TG_flip(SEA_COLOR);
+		TG_new_frame(SEA_COLOR);
 	}
 
 	TG_destroy_object(win_obj);
